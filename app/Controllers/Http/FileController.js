@@ -2,6 +2,7 @@
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
+/** @typedef {import('@adonisjs/framework/src/')} Response */
 
 const File = use('App/Models/File')
 const Helper = use('Helpers')
@@ -10,6 +11,26 @@ const Helper = use('Helpers')
  * Resourceful controller for interacting with files
  */
 class FileController {
+  /**
+   *
+   * @param {Object} ctx
+   * @param {Object} ctx.params
+   * @param {Response} ctx.response
+   */
+  async get ({ params, response }) {
+    const { id } = params
+    console.log(id)
+
+    try {
+      const file = await File.findOrFail(id)
+
+      return response.download(Helper.tmpPath(`uploads/${file.file}`))
+    } catch (error) {
+      console.log(error)
+      return response.status(error.status).send({ error: 'an error occured when getting the file' })
+    }
+  }
+
   /**
    * Create/save a new file.
    * POST files

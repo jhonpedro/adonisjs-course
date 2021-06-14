@@ -34,6 +34,18 @@ class User extends Model {
   tokens () {
     return this.hasMany('App/Models/Token')
   }
+
+  static get visible () {
+    return ['username', 'email']
+  }
+
+  projects () {
+    return this.hasMany('App/Models/Project')
+  }
+
+  tasks () {
+    return this.hasMany('App/Model/Task')
+  }
 }
 
 module.exports = User

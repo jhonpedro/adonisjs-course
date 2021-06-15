@@ -1,16 +1,21 @@
 'use strict'
 
+const Antl = use('Antl')
+
 class Task {
   get validateAll () {
     return true
   }
 
   get rules () {
-    console.log('\n\n\n\n\nValidate\n\n\n\n\n')
     return {
       title: 'required',
       due_date: 'date'
     }
+  }
+
+  get messages () {
+    return Antl.list('validation')
   }
 }
 

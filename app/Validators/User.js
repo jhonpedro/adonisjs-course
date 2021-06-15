@@ -13,6 +13,12 @@ class User {
       password: 'required|confirmed'
     }
   }
+
+  get sanitizationRules () {
+    return {
+      email: 'normalize_email'
+    }
+  }
 }
 
 module.exports = User

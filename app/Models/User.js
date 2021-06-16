@@ -35,6 +35,10 @@ class User extends Model {
     return this.hasMany('App/Models/Token')
   }
 
+  adresses () {
+    return this.hasMany('App/Model/UserAdress')
+  }
+
   static get visible () {
     return ['username', 'email']
   }
